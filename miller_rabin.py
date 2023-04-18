@@ -18,25 +18,27 @@ class MillerRabin:
         # quanto mais vezes repetirmos mais o resultado é confiável
         for _ in range(self.rounds):
             a = random.randint(2, self.number - 2) # Devido ao Teorema de Fermat, para qualquer n
-                                                   # primo e qualquer inteiro a não divisivel por n
+                                                   # primo e qualquer inteiro a não divisivel por n,
                                                    # a ** (n-1) sempre sera congruente a 1 (mod n),
                                                    # porém se n for composto existem a para os quais
-                                                   # a ** (n-1) não é congruente a 1 (mod n),
-                                                   # os chamados pseudoprimos. Escolhemos a entre
+                                                   # a ** (n-1) é congruente a 1 (mod n), sendo n 
+                                                   # um pseudoprimo. Escolhemos a entre
                                                    # 2 e n-2 justamente para diminuir a possibilidade
                                                    # de selecionarmos um pseudoprimo
                                          
 
-            # Selecionada a base para testar a primalidade de n, verifica-se se a é testemunha
-            # da composição de n. Se n for composto, haverá pelo menos um valor de (a ** i) mod n
-            # que não é congruente a i (mod n), para algum i no intervalo [0, n-1]
+            # Selecionada a base para testar a primalidade de n, calcula-se x = (a ** d) mod n.
+            # Se n for composto, x é testemunha da composição de n, se e somente se:
+            # x é congruente a 1 (mod n) 
+            # ou
             x = pow(a, d, self.number)
+            # existe um i pertencente a [0, s-1], tal que a ** (2 ** i * d) é congruente a -1 (mod n)
             for _ in range(s):
                 # Mais um passo necessário para encontrar testemunhas da composição de n, iterativamente.
                 # Busca-se por raízes quadradas não triviais de 1 (mod n)
                 y = pow(x, 2, self.number)
                 # Se x não é congruente a 1 (mod n) ou -1 (mod n),
-                # então x é uma raiz quadrada não trivial de 1 (mod n) e a é testemunha da composição de n
+                # então x é uma raiz quadrada não trivial de 1 (mod n) e é testemunha da composição de n
                 if y == 1 and x != 1 and x != (self.number - 1):
                     return f"{self.number}\n é composto\n"
                 x = y

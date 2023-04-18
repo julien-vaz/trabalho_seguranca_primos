@@ -18,11 +18,11 @@ class Fermat:
         # quanto mais vezes repetirmos mais o resultado é confiável
         for _ in range(self.rounds):
             a = random.randint(2, self.number - 2) # Devido ao Teorema de Fermat, para qualquer n
-                                                   # primo e qualquer inteiro a não divisivel por n
+                                                   # primo e qualquer inteiro a não divisivel por n,
                                                    # a ** (n-1) sempre sera congruente a 1 (mod n),
                                                    # porém se n for composto existem a para os quais
-                                                   # a ** (n-1) não é congruente a 1 (mod n),
-                                                   # os chamados pseudoprimos. Escolhemos a entre
+                                                   # a ** (n-1) é congruente a 1 (mod n), sendo n 
+                                                   # um pseudoprimo. Escolhemos a entre
                                                    # 2 e n-2 justamente para diminuir a possibilidade
                                                    # de selecionarmos um pseudoprimo
             
