@@ -6,7 +6,7 @@ class LCG:
     def __init__(self, mult, incr, bits):
         self.a = mult
         self.c = incr
-        self.m = 2 ** bits - 1 # Escolhi usar um Mersenne Prime como modulo
+        self.m = 2 ** bits - 1 # Escolhi usar um Mersenne Prime como módulo
         self.state = int(time.time())
         # Parametro adicional para controlar o numero de bits
         self.bits = bits
@@ -14,7 +14,7 @@ class LCG:
     # Funcao geradora
     def generate(self):
         self.state = (self.a * self.state + self.c) % self.m
-        return self.state << (self.bits - self.state.bit_length())
+        return self.state & ((1 << self.bits) - 1)
 
 # Funcao global para salvar os numeros gerados em um TXT
 def save_as_txt(bits, lcg):
